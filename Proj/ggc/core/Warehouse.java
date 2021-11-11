@@ -30,6 +30,8 @@ public class Warehouse implements Serializable {
 
 	private int _nextTransactionId;
 	private int _batchId;
+	private double _contabilisticBalance;
+	private double _availableBalance;
 	private List<Transaction> _allTransactions;
 	private List<Partner> _allPartners;
 	private List<Product> _allProducts;
@@ -404,6 +406,16 @@ public class Warehouse implements Serializable {
 		_date.add(day);
 	}
 	
+
+
+	//Balance
+	protected double getCurrentBalance(){
+		return _availableBalance;
+	}
+
+	protected double getContabilisticBalance(){
+		return _contabilisticBalance;
+	}
   /**
    * @param txtfile filename to be loaded.
    * @throws IOException

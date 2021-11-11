@@ -5,14 +5,16 @@ import java.util.*;
 import java.io.Serializable;
 import java.math.*;
 
-public abstract class Product implements Serializable{
+public abstract class Product implements Serializable, NotifySubject{
     private double _maxPrice;
     private String _id;
     private int _quantity;
+    private List<NotifyObserver> _observers;
 
     public Product(String id){
         _id = id;
         _maxPrice = 0;
+        _observers = new ArrayList<NotifyObserver>();
     }
     
     /**
@@ -65,4 +67,20 @@ public abstract class Product implements Serializable{
     }
     
     public abstract int getN();
+
+    public void addObserver(NotifyObserver obs){
+        _observers.add(obs); 
+     }
+ 
+      
+     public void removeObserver(NotifyObserver obs){
+         _observers.remove(obs);
+     }
+ 
+     @Override
+     public void notificateObserver( String notification, Product prod){
+         for( NotifyObserver o : _observers){
+             o.inform( notification, prod);
+         }
+     }
 }

@@ -130,6 +130,14 @@ public class WarehouseManager implements Serializable{
 		return _warehouse.registerBatch(partner, product, quantity, price);
 	}
 
+	public double getCurrentBalance(){
+		return _warehouse.getCurrentBalance();
+	}
+
+	public double getContabilisticBalance(){
+		return _warehouse.getContabilisticBalance();
+	}
+
 	public String getFileName(){
 		return _filename;
 	}

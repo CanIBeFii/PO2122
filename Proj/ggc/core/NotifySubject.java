@@ -6,4 +6,4 @@ public interface NotifySubject {
     public void removeObserver(NotifyObserver obs);
     public void notificateObserver(String notificacion, Product p);
     
-}
+} 

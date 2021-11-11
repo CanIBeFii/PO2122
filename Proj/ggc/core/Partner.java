@@ -13,8 +13,8 @@ public class Partner implements Serializable{
 	private List<SaleByCredit> _sales;
 	private List<BreakdownSale> _breakdownSales;
 	private List<Acquisition> _acquisitions;
-	private Set<Batch> _batches;
-	private Set<Notification> _notifications;
+	private List<Batch> _batches;
+	private List<Notification> _notifications;
 
 
 	public Partner(String name, String address, String id){
@@ -28,6 +28,8 @@ public class Partner implements Serializable{
 		_breakdownSales = bs;
 		List<Acquisition> a = new ArrayList<>();
 		_acquisitions = a;
+		List<Notification> noti = new ArrayList<>();
+		_notifications = noti;
 
 	}
 
@@ -220,5 +222,14 @@ public class Partner implements Serializable{
 				break;
 			}
 		}
+	}
+
+	public Notification addNotification(String des, Product p){
+		_notifications.add(n);
+	}
+
+	@Override
+	public void inform(String des, Product p){
+
 	}
 }

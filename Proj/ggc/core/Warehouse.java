@@ -163,6 +163,9 @@ public class Warehouse implements Serializable {
 			return false;
 		}
 		SimpleProduct p = new SimpleProduct(id);
+		for(Partner partner: _allPartners){
+			p.addObserver(partner);
+		}
 		return _allProducts.add(p);
 	}
 
@@ -177,6 +180,9 @@ public class Warehouse implements Serializable {
 			return false;
 		}
 		AggregateProduct ap = new AggregateProduct(id, recipe);
+		for(Partner partner: _allPartners){
+			ap.addObserver(partner);
+		}
 		return _allProducts.add(ap);
 	}
 
@@ -433,7 +439,7 @@ public class Warehouse implements Serializable {
 		double res = 0;
 		for(Transaction t: _allTransactions){
 			if(t.getType().equals("SaleByCredit")){
-					res += t.getAmountPaid();
+					res += t.getAmountPaid();>
 			}
 			else if(t.getType().equals("Acquisition")){
 				res -= t.getAmountPaid();

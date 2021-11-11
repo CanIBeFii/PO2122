@@ -128,7 +128,11 @@ public class Warehouse implements Serializable {
 			return false;
 		}
 		Partner p = new Partner(name, address, id);
-		return _allPartners.add(p);
+		_allPartners.add(p);
+		for(Product prod: _allProducts){
+			prod.addObserver(p);
+		}
+		return true;
 	}
 
 
@@ -388,7 +392,7 @@ public class Warehouse implements Serializable {
 			_batchId++;
 			return true;
 		}
-		return false;
+		return false;essage.currentB
 	}
 
 	protected void removeQuantityBatch(int id, int quantity){
@@ -439,7 +443,7 @@ public class Warehouse implements Serializable {
 		double res = 0;
 		for(Transaction t: _allTransactions){
 			if(t.getType().equals("SaleByCredit")){
-					res += t.getAmountPaid();>
+					res += t.getAmountPaid();
 			}
 			else if(t.getType().equals("Acquisition")){
 				res -= t.getAmountPaid();

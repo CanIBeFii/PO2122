@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.Serializable;
 import java.math.*;
 
-public class Partner implements Serializable{
+public class Partner implements Serializable, NotifyObserver{
 	private String _name;
 	private String _address;
 	private String _id;
@@ -224,12 +224,13 @@ public class Partner implements Serializable{
 		}
 	}
 
-	public Notification addNotification(String des, Product p){
-		_notifications.add(n);
+	public Notification createNotification(String des, Product p){
+		Notification n = new Notification(p, des);
+		return n;
 	}
 
 	@Override
 	public void inform(String des, Product p){
-
+		_notifications.add(createNotification(des, p));
 	}
 }

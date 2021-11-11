@@ -9,8 +9,8 @@ public class Notification implements Serializable{
 	private boolean _notify;
 	private String _description;
 
-	public Notification(String type, Product product, String description){
-		_type = type;
+	public Notification(Product product, String description){
+		//_type = type
 		_product = product;
 		_description = description;
 		_notify = false;

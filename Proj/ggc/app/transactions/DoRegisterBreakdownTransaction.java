@@ -4,6 +4,11 @@ import pt.tecnico.uilib.forms.Form;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 import ggc.core.WarehouseManager;
+import ggc.core.Partner;
+import ggc.core.Product;
+
+import ggc.app.exception.UnknownPartnerKeyException;
+import ggc.app.exception.UnknownProductKeyException;
 //FIXME import classes
 
 /**
@@ -26,6 +31,18 @@ public class DoRegisterBreakdownTransaction extends Command<WarehouseManager> {
     String idPart = _form.stringField("idPart");
     String idProd = _form.stringField("idProd");
     int quantity = _form.integerField("quantity");
+
+    Partner part = _receiver.getPartner(idPart);
+    if(part == null){
+      throw new UnknownPartnerKeyException(idPart);
+    }
+
+    Product prod = _receiver.getProduct(idProd);
+    if(prod == null){
+      throw new UnknownProductKeyException(idProd);
+    }
+
+    
   }
 
 }

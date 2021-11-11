@@ -30,7 +30,6 @@ public class WarehouseManager implements Serializable{
 	  _warehouse = new Warehouse();
   }
 
-
   public Recipe getRecipe(String name){
 		return _warehouse.getRecipe(name);
 	}

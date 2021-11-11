@@ -52,6 +52,7 @@ public class DoRegisterAcquisitionTransaction extends Command<WarehouseManager> 
         Product p = _receiver.getProduct(idProd);
         _receiver.registerAcquisition(p, quantity, price, part);
       }
+      
     }
 
 

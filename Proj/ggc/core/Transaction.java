@@ -63,4 +63,8 @@ public abstract class Transaction implements Serializable{
 		}
 		return true;
 	}
+
+	public abstract String getType();
+
+	public abstract double getAmountPaid();
 }

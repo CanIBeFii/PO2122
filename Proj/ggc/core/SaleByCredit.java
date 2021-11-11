@@ -109,4 +109,8 @@ public class SaleByCredit extends Sale{
 			getPartner().getId(), getProduct().getId(), getQuantity(),
 				(int)Math.round(getBaseValue()), (int)Math.round(_amountPaid), _deadline.getDays(), getPaymentDate().getDays());
 	}
+
+	public String getType(){
+		return "SaleByCredit";
+	}
 }

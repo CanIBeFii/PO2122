@@ -15,4 +15,12 @@ public class BreakdownSale extends Sale{
 
 	//fazer o to String
 
+
+	public String getType(){
+		return "BreakdownSale";
+	}
+
+	public double getAmountPaid(){
+		return getBaseValue();
+	}
 }

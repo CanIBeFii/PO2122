@@ -410,10 +410,39 @@ public class Warehouse implements Serializable {
 
 	//Balance
 	protected double getCurrentBalance(){
+		double res = 0;
+		for(Transaction t: _allTransactions){
+			if(t.getType().equals("SaleByCredit")){
+				if(t.isPaid()){
+					res += t.getAmountPaid();
+
+				}
+			}
+			else if(t.getType().equals("Acquisition")){
+				res -= t.getAmountPaid();
+			}
+			else{
+				res += 0;
+			}
+		}
+		_availableBalance = res;
 		return _availableBalance;
 	}
 
 	protected double getContabilisticBalance(){
+		double res = 0;
+		for(Transaction t: _allTransactions){
+			if(t.getType().equals("SaleByCredit")){
+					res += t.getAmountPaid();
+			}
+			else if(t.getType().equals("Acquisition")){
+				res -= t.getAmountPaid();
+			}
+			else{
+				res += 0;
+			}
+		}
+		_contabilisticBalance = res;
 		return _contabilisticBalance;
 	}
   /**

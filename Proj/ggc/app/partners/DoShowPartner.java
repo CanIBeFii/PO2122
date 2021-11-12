@@ -3,6 +3,7 @@ package ggc.app.partners;
 import pt.tecnico.uilib.forms.Form;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
+import ggc.core.Notification;
 import ggc.core.Partner;
 import ggc.core.WarehouseManager;
 import ggc.app.exception.UnknownPartnerKeyException;
@@ -29,6 +30,12 @@ class DoShowPartner extends Command<WarehouseManager> {
     }
     Partner p = _receiver.getPartner(partnerId);
 	  _display.addLine(p.toString());
+    for(Notification n: p.getNotifications()){
+      if(!n.hasNotify()){
+        _display.addLine(n.toString());
+        n.toggleNotify();
+      }
+    }
 	  _display.display();
 	}
 }

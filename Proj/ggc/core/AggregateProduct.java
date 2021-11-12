@@ -18,6 +18,14 @@ public class AggregateProduct extends Product{
 		return String.format("%s|%d|%d|%s", getId(), (int)Math.round(getPrice()), getQuantity(), _recipe.toString());
 	}
 
+	public String getType(){
+		return "AggregateProduct";
+	}
+
+	public Recipe getRecipe(){
+		return _recipe;
+	}
+	
 	public int getN(){
 		return 3;
 	}

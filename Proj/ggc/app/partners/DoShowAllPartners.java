@@ -22,7 +22,7 @@ class DoShowAllPartners extends Command<WarehouseManager> {
     
     Comparator<Partner> comparator = new Comparator<Partner>() {
     public int compare(Partner a, Partner b) {
-		return (a.getId()).compareTo(b.getId());
+		return (a.getId().toUpperCase()).compareTo(b.getId().toUpperCase());
       }
     };
 	  partners.sort(comparator);

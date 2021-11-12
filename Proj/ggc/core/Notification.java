@@ -8,11 +8,13 @@ public class Notification implements Serializable{
 	private Product _product;
 	private boolean _notify;
 	private String _description;
+	private double _price;
 
-	public Notification(Product product, String description){
+	public Notification(Product product, String description, double price){
 		_type = NotificationType.MAIL;
 		_product = product;
 		_description = description;
+		_price = price;
 		_notify = false;
 	}
 
@@ -42,6 +44,6 @@ public class Notification implements Serializable{
 	}
 
 	public String toString(){
-		return getDescription() + "|" + _product.getId() + "|";
+		return getDescription() + "|" + _product.getId() + "|" + (int)_price;
 	}
 }

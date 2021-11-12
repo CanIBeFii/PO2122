@@ -33,7 +33,7 @@ class DoShowPartnerSales extends Command<WarehouseManager> {
   	List<Sale> sales = _receiver.getPartnerSales(_receiver.getPartner(idPartner));
   	
   	for(Sale s: sales){
-		_display.addLine(s.toString());
+		  _display.addLine(s.toString());
   	}
   	_display.display();
   }

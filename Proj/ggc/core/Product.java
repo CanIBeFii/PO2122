@@ -76,11 +76,19 @@ public abstract class Product implements Serializable, NotifySubject{
      public void removeObserver(NotifyObserver obs){
          _observers.remove(obs);
      }
- 
+
+    public List<NotifyObserver> getObservers(){
+        return _observers;
+    }
+
+    public abstract Recipe getRecipe();
+    
+    public abstract String getType();
+
      @Override
-     public void notificateObserver( String notification, Product prod){
+     public void notificateObserver( String notification, Product prod, double price){
          for( NotifyObserver o : _observers){
-             o.inform( notification, prod);
+             o.inform( notification, prod, price);
          }
      }
 }

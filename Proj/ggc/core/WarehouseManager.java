@@ -90,7 +90,7 @@ public class WarehouseManager implements Serializable{
 		return _warehouse.registerAcquisition(product, quantity, price, part);
 	}
 
-	public boolean registerBreakdownSale(Product product, int quantity, double price, Partner part, int id){
+	public boolean registerBreakdownSale(Product product, int quantity, double price, Partner part){
 		return _warehouse.registerBreakdownSale(product, quantity, price, part);
 	}
 
@@ -132,6 +132,10 @@ public class WarehouseManager implements Serializable{
 
 	public double getCurrentBalance(){
 		return _warehouse.getCurrentBalance();
+	}
+
+	public Date getCurrentDate(){
+		return _warehouse.getCurrentDate();
 	}
 
 	public double getContabilisticBalance(){

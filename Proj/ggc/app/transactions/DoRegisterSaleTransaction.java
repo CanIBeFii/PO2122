@@ -49,7 +49,7 @@ public class DoRegisterSaleTransaction extends Command<WarehouseManager> {
     }
     /*Fazer verificar quantidade !!!!!!!!!!!!!!!!!!!!!!!!!!*/
     if (!(_receiver.registerSaleByCredit(prod, quantity, part, deadline))){
-      throw new UnavailableProductException(idProd, 1, 1);
+      throw new UnavailableProductException(idProd, quantity, prod.getQuantity());
       /*Ver qual a exception!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       MUdar valores dentro de UNAVAIABLEpRODUCTeXCEPTION
       

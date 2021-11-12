@@ -22,7 +22,7 @@ class DoShowAllProducts extends Command<WarehouseManager> {
     
     Comparator<Product> comparator = new Comparator<Product>() {
       public int compare(Product a, Product b) {
-        return (a.getId()).compareTo(b.getId());
+        return (a.getId()).toUpperCase().compareTo(b.getId().toUpperCase());
       }
     };
     

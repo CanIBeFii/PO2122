@@ -13,6 +13,14 @@ public class SimpleProduct extends Product {
 		
 	}
 
+	public String getType(){
+		return "SimpleProduct";
+	}
+
+	public Recipe getRecipe(){
+		return null;
+	}
+
 	public int getN(){
 		return 5;
 	}

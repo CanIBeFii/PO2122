@@ -7,10 +7,14 @@ import ggc.core.WarehouseManager;
 
 import ggc.app.exception.UnknownProductKeyException;
 import ggc.app.exception.UnknownPartnerKeyException;
+
+import javax.swing.text.AbstractDocument.BranchElement;
+
 import ggc.app.exception.UnavailableProductException;
 
 import ggc.core.Partner;
 import ggc.core.Product;
+import ggc.core.Batch;
 //FIXME import classes
 
 /**
@@ -58,7 +62,16 @@ public class DoRegisterAcquisitionTransaction extends Command<WarehouseManager> 
 
     else{
       Product pro = _receiver.getProduct(idProd);
-    //Verificar quantidade yhyh do it e preco!!!!!!!
+      //Verificar quantidade yhyh do it e preco!!!!!!!
+      boolean bargain = true;
+      for(Batch bct: _receiver.getBatchProduct(pro)){
+        if(bct.getPrice() <= price){
+          bargain = false;
+        }
+      }
+      if(bargain){
+        pro.notificateObserver("BARGAIN", pro, price);
+      }
       if (!(_receiver.registerAcquisition(pro, quantity, price, part))){
         throw new UnavailableProductException(idProd, 1, 1);
       }

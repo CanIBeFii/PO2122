@@ -170,6 +170,7 @@ public class Warehouse implements Serializable {
 		for(Partner partner: _allPartners){
 			p.addObserver(partner);
 		}
+		//p.notificateObserver("NEW", p);
 		return _allProducts.add(p);
 	}
 
@@ -187,6 +188,7 @@ public class Warehouse implements Serializable {
 		for(Partner partner: _allPartners){
 			ap.addObserver(partner);
 		}
+		//p.notificateObserver("NEW", ap);
 		return _allProducts.add(ap);
 	}
 
@@ -219,11 +221,6 @@ public class Warehouse implements Serializable {
 		return p.getAcquisitions();
 	}
 
-	/**
-	 * 
-	 * @param p
-	 * @return
-	 */
 	protected List<Sale> getPartnerSales(Partner p){
 		return p.getSales();
 	}
@@ -281,6 +278,10 @@ public class Warehouse implements Serializable {
 			}
 		};
 
+		if(product.getQuantity() < quantity){
+			return false;
+		}
+
 		batches.sort(comparator);
 		int amount = 0;
 		double price = 0;
@@ -297,11 +298,9 @@ public class Warehouse implements Serializable {
 				}
 			}
 		}
-		if (quantity != amount){
-			return false;
-		}
 		SaleByCredit sc = new SaleByCredit(product, quantity, price, part, deadDate, _nextTransactionId, new Date(0));
 		if(_allTransactions.add(sc)){
+			part.addSale(sc);
 			_nextTransactionId++;
 			return true;
 		}
@@ -386,9 +385,18 @@ public class Warehouse implements Serializable {
    	*/
 	protected boolean registerBatch(Partner partner, Product product, int quantity, double price){
 		Batch b = new Batch(partner, product, quantity, price, _batchId);
+		boolean bargain = true;
+		/*for(Batch bct: getBatchProduct(product)){
+			if(bct.getPrice() <= price){
+				bargain = false;
+			}
+		}*/
 		if(_allBatches.add(b)){
 			product.setMaxPrice(price);
 			product.addQuantity(quantity);
+			/*if(bargain){
+				product.notificateObserver("BARGAIN", product);
+			}*/
 			_batchId++;
 			return true;
 		}
@@ -414,6 +422,11 @@ public class Warehouse implements Serializable {
    	*/
 	protected void advanceCurrentDay(int day){
 		_date.add(day);
+	}
+
+
+	protected Date getCurrentDate(){
+		return _date;
 	}
 	
 

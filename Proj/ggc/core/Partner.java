@@ -10,8 +10,7 @@ public class Partner implements Serializable, NotifyObserver{
 	private String _id;
 	private String _status;
 	private double _points;
-	private List<SaleByCredit> _sales;
-	private List<BreakdownSale> _breakdownSales;
+	private List<Sale> _sales;
 	private List<Acquisition> _acquisitions;
 	private List<Batch> _batches;
 	private List<Notification> _notifications;
@@ -23,10 +22,8 @@ public class Partner implements Serializable, NotifyObserver{
 		_address = address;
 		_id = id;
 		_status = "NORMAL";
-		List<SaleByCredit> s = new ArrayList<>();
+		List<Sale> s = new ArrayList<>();
 		_sales = s;
-		List<BreakdownSale> bs = new ArrayList<>();
-		_breakdownSales = bs;
 		List<Acquisition> a = new ArrayList<>();
 		_acquisitions = a;
 		List<Notification> noti = new ArrayList<>();
@@ -56,6 +53,10 @@ public class Partner implements Serializable, NotifyObserver{
    	*/
 	public String getId(){
 		return _id;
+	}
+
+	public List<Notification> getNotifications(){
+		return _notifications;
 	}
 
 	/**
@@ -90,10 +91,7 @@ public class Partner implements Serializable, NotifyObserver{
 	 * @return the list of sales of the partner
 	 */
 	public List<Sale> getSales(){
-		List<Sale> sales = new ArrayList<>();
-		sales.addAll(_sales);
-		sales.addAll(_breakdownSales);
-		return sales;
+		return _sales;
 	}
 	
 	/**
@@ -142,7 +140,7 @@ public class Partner implements Serializable, NotifyObserver{
 		if(_sales == null){
 			return res;
 		}
-		for(SaleByCredit s : _sales){
+		for(Sale s : _sales){
 			res += s.getBaseValue();
 		}
 		return res;
@@ -153,7 +151,7 @@ public class Partner implements Serializable, NotifyObserver{
 		if (_sales == null){
 			return res;
 		}
-		for(SaleByCredit s : _sales){
+		for(Sale s : _sales){
 			res += s.getAmountPaid();
 		}
 		return res;
@@ -168,7 +166,7 @@ public class Partner implements Serializable, NotifyObserver{
 	}
 
 	public void addBreakdown(BreakdownSale bs){
-		_breakdownSales.add(bs);
+		_sales.add(bs);
 	}
 	
 	/**
@@ -227,8 +225,8 @@ public class Partner implements Serializable, NotifyObserver{
 		}
 	}
 
-	public Notification createNotification(String des, Product p){
-		Notification n = new Notification(p, des);
+	public Notification createNotification(String des, Product p, double price){
+		Notification n = new Notification(p, des, price);
 		return n;
 	}
 
@@ -244,7 +242,7 @@ public class Partner implements Serializable, NotifyObserver{
 	}
 
 	@Override
-	public void inform(String des, Product p){
-		_notifications.add(createNotification(des, p));
+	public void inform(String des, Product p, double price){
+		_notifications.add(createNotification(des, p, price));
 	}
 }

@@ -11,6 +11,7 @@ public class SaleByCredit extends Sale{
 
 		super(p, quantity, price, part, id, date);
 		_deadline = deadline;
+		_amountPaid = getBaseValue();
 	}
 
 	public Date getDeadline(){
@@ -104,7 +105,6 @@ public class SaleByCredit extends Sale{
 	}
 
 	public String toString(){
-		setAmountPaid(getBaseValue());
 		return String.format("VENDA|%s|%s|%s|%d|%d|%d|%d", getId(),
 			getPartner().getId(), getProduct().getId(), getQuantity(),
 				(int)Math.round(getBaseValue()), (int)Math.round(_amountPaid), _deadline.getDays(), getPaymentDate().getDays());

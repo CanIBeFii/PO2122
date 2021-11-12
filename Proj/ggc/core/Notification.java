@@ -4,19 +4,19 @@ import java.io.Serializable;
 
 public class Notification implements Serializable{
 
-	private String _type;
+	private NotificationType _type;
 	private Product _product;
 	private boolean _notify;
 	private String _description;
 
 	public Notification(Product product, String description){
-		//_type = type
+		_type = NotificationType.MAIL;
 		_product = product;
 		_description = description;
 		_notify = false;
 	}
 
-	public String getType(){
+	public NotificationType getType(){
 		return _type;
 	}
 
@@ -42,6 +42,6 @@ public class Notification implements Serializable{
 	}
 
 	public String toString(){
-		return _type + "|" + _product.getId() + "|"+ _product.getPrice();
+		return getDescription() + "|" + _product.getId() + "|";
 	}
 }

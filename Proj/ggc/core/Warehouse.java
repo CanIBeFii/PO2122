@@ -392,7 +392,7 @@ public class Warehouse implements Serializable {
 			_batchId++;
 			return true;
 		}
-		return false;essage.currentB
+		return false;
 	}
 
 	protected void removeQuantityBatch(int id, int quantity){
@@ -455,6 +455,12 @@ public class Warehouse implements Serializable {
 		_contabilisticBalance = res;
 		return _contabilisticBalance;
 	}
+
+	//Notifications
+	protected boolean toggleProductNotifications(Product prod, Partner part){
+		return part.toggleProductNotifications(prod);
+	}
+	
   /**
    * @param txtfile filename to be loaded.
    * @throws IOException

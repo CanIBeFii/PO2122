@@ -138,6 +138,10 @@ public class WarehouseManager implements Serializable{
 		return _warehouse.getContabilisticBalance();
 	}
 
+	public boolean toggleProductNotifications(Product prod, Partner part){
+		return _warehouse.toggleProductNotifications(prod, part);
+	}
+
 	public String getFileName(){
 		return _filename;
 	}

@@ -59,7 +59,7 @@ public class DoRegisterAcquisitionTransaction extends Command<WarehouseManager> 
     else{
       Product pro = _receiver.getProduct(idProd);
     //Verificar quantidade yhyh do it e preco!!!!!!!
-      if (!(_receiver.registerAcquisition(prod, quantity, price, part))){
+      if (!(_receiver.registerAcquisition(pro, quantity, price, part))){
         throw new UnavailableProductException(idProd, 1, 1);
       }
     }

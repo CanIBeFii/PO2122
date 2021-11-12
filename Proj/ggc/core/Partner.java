@@ -15,6 +15,7 @@ public class Partner implements Serializable, NotifyObserver{
 	private List<Acquisition> _acquisitions;
 	private List<Batch> _batches;
 	private List<Notification> _notifications;
+	private List<Product> _interested;
 
 
 	public Partner(String name, String address, String id){
@@ -30,6 +31,8 @@ public class Partner implements Serializable, NotifyObserver{
 		_acquisitions = a;
 		List<Notification> noti = new ArrayList<>();
 		_notifications = noti;
+		List<Product> interes = new ArrayList<>();
+		_interested = interes;
 
 	}
 
@@ -227,6 +230,17 @@ public class Partner implements Serializable, NotifyObserver{
 	public Notification createNotification(String des, Product p){
 		Notification n = new Notification(p, des);
 		return n;
+	}
+
+	public boolean toggleProductNotifications(Product prod){
+		for(Product p: _interested){
+			if(p.getId().equals(prod.getId())){
+				_interested.remove(p);
+				return false;
+			}
+		}
+		_interested.add(prod);
+		return true;
 	}
 
 	@Override

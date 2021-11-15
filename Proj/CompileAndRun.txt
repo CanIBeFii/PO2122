@@ -1,0 +1,12 @@
+Compile:
+
+find ggc -name "*.java" -print | xargs javac -cp po-uilib.jar:.
+
+Run:
+
+java -cp po-uilib.jar:. ggc.app.App
+
+
+Run with import:
+
+java -Dimport=ficheiro.im -cp po-uilib.jar:. ggc.app.App

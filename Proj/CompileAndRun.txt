@@ -10,3 +10,8 @@ java -cp po-uilib.jar:. ggc.app.App
 Run with import:
 
 java -Dimport=ficheiro.im -cp po-uilib.jar:. ggc.app.App
+
+
+Jar file:
+
+jar -cvf -------.jar ggc

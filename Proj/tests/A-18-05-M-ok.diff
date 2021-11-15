@@ -1,0 +1,19 @@
+*** tests/A-18-05-M-ok.out	2021-11-05 10:03:43.000000000 +0000
+--- tests/A-18-05-M-ok.outhyp	2021-11-15 16:29:03.925975077 +0000
+***************
+*** 97,103 ****
+  6 - Mostrar vendas (e desagregações) com parceiro
+  0 - Sair
+  Escolha uma opção: Identificador do parceiro: VENDA|2|M2|ROLHA|1|2|2|1
+! VENDA|5|M2|SAL|2|40|40|2
+  Gestão de Parceiros
+  1 - Mostrar parceiro
+  2 - Mostrar parceiros
+--- 97,103 ----
+  6 - Mostrar vendas (e desagregações) com parceiro
+  0 - Sair
+  Escolha uma opção: Identificador do parceiro: VENDA|2|M2|ROLHA|1|2|2|1
+! VENDA|5|M2|SAL|2|200|200|2
+  Gestão de Parceiros
+  1 - Mostrar parceiro
+  2 - Mostrar parceiros

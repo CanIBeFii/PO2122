@@ -4,10 +4,8 @@ import java.util.Comparator;
 import java.util.List;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
-import ggc.core.Product;
 import ggc.core.Batch;
 import ggc.core.WarehouseManager;
-import java.math.*;
 
 
 /**

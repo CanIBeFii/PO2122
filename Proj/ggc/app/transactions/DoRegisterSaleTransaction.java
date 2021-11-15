@@ -13,9 +13,6 @@ import ggc.app.exception.UnavailableProductException;
 import ggc.core.Partner;
 import ggc.core.Product;
 
-/**
- * 
- */
 public class DoRegisterSaleTransaction extends Command<WarehouseManager> {
 
   Form _form = new Form();
@@ -47,13 +44,8 @@ public class DoRegisterSaleTransaction extends Command<WarehouseManager> {
     if (_receiver.getCurrentDay() > deadline){
       throw new InvalidDateException(deadline);
     }
-    /*Fazer verificar quantidade !!!!!!!!!!!!!!!!!!!!!!!!!!*/
     if (!(_receiver.registerSaleByCredit(prod, quantity, part, deadline))){
       throw new UnavailableProductException(idProd, quantity, prod.getQuantity());
-      /*Ver qual a exception!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      MUdar valores dentro de UNAVAIABLEpRODUCTeXCEPTION
-      
-      IMportante ver isto senão dá .....*/
     }
   }
 

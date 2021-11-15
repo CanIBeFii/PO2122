@@ -8,7 +8,6 @@ import ggc.core.Batch;
 
 import java.util.*;
 import ggc.app.exception.UnknownPartnerKeyException;
-//FIXME import classes
 
 /**
  * Show batches supplied by partner.

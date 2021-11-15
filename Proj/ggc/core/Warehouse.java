@@ -4,8 +4,6 @@ package ggc.core;
 import java.io.Serializable;
 import java.io.IOException;
 
-import ggc.core.Acquisition;
-import ggc.core.Transaction;
 import ggc.core.exception.BadEntryException;
 
 import java.util.*;
@@ -20,8 +18,8 @@ import java.util.*;
  *
  * @author Filipe Mendes - 98934
  * @author Tiago Dinis - 98970
- * @version Intermedia
- * @since 29/10/2021
+ * @version Final
+ * @since 12/11/2021
  */
 public class Warehouse implements Serializable {
 
@@ -54,10 +52,8 @@ public class Warehouse implements Serializable {
 		_allRecipes = r;
 	}
 
-
 	//Recipes
 	/**
-   * 
    * @param name
    * @return
    */
@@ -170,7 +166,6 @@ public class Warehouse implements Serializable {
 		for(Partner partner: _allPartners){
 			p.addObserver(partner);
 		}
-		//p.notificateObserver("NEW", p);
 		return _allProducts.add(p);
 	}
 
@@ -188,7 +183,6 @@ public class Warehouse implements Serializable {
 		for(Partner partner: _allPartners){
 			ap.addObserver(partner);
 		}
-		//p.notificateObserver("NEW", ap);
 		return _allProducts.add(ap);
 	}
 
@@ -385,18 +379,9 @@ public class Warehouse implements Serializable {
    	*/
 	protected boolean registerBatch(Partner partner, Product product, int quantity, double price){
 		Batch b = new Batch(partner, product, quantity, price, _batchId);
-		boolean bargain = true;
-		/*for(Batch bct: getBatchProduct(product)){
-			if(bct.getPrice() <= price){
-				bargain = false;
-			}
-		}*/
 		if(_allBatches.add(b)){
 			product.setMaxPrice(price);
 			product.addQuantity(quantity);
-			/*if(bargain){
-				product.notificateObserver("BARGAIN", product);
-			}*/
 			_batchId++;
 			return true;
 		}

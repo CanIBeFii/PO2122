@@ -3,7 +3,6 @@ package ggc.core;
 
 import java.util.*;
 import java.io.Serializable;
-import java.math.*;
 
 public abstract class Product implements Serializable, NotifySubject{
     private double _maxPrice;
@@ -35,6 +34,9 @@ public abstract class Product implements Serializable, NotifySubject{
         }
     }
 	
+    /**
+     * @param quantity
+     */
     public void removeQuantity(int quantity){
         if (quantity > 0){
             _quantity -= quantity;
@@ -68,15 +70,23 @@ public abstract class Product implements Serializable, NotifySubject{
     
     public abstract int getN();
 
+    /**
+     * @param obs
+     */
     public void addObserver(NotifyObserver obs){
         _observers.add(obs); 
      }
  
-      
-     public void removeObserver(NotifyObserver obs){
-         _observers.remove(obs);
+     /**
+     * @param obs
+     */ 
+    public void removeObserver(NotifyObserver obs){
+        _observers.remove(obs);
      }
-
+    
+    /**
+     * @param obs
+     */
     public List<NotifyObserver> getObservers(){
         return _observers;
     }

@@ -6,7 +6,6 @@ import pt.tecnico.uilib.menus.CommandException;
 import ggc.core.WarehouseManager;
 
 import ggc.app.exception.UnknownTransactionKeyException;
-//FIXME import classes
 
 /**
  * Show specific transaction.

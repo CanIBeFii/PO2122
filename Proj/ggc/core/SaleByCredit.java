@@ -1,7 +1,5 @@
 package ggc.core;
 
-import java.math.*;
-
 public class SaleByCredit extends Sale{
 
 	private Date _deadline;
@@ -14,14 +12,27 @@ public class SaleByCredit extends Sale{
 		_amountPaid = getBaseValue();
 	}
 
+	
+	/** 
+	 * @return Date
+	 */
 	public Date getDeadline(){
 		return _deadline;
 	}
 
+	
+	/** 
+	 * @return double
+	 */
 	public double getAmountPaid(){
 		return _amountPaid;
 	}
 
+	
+	/** 
+	 * @param d
+	 * @param price
+	 */
 	public void setPaymentDate(Date d, double price){
 		if(_paymentDate.getDays() == 0){
 			_paymentDate.add(d.getDays());
@@ -29,12 +40,21 @@ public class SaleByCredit extends Sale{
 		}
 	}
 
+	
+	/** 
+	 * @param price
+	 */
 	public void setAmountPaid(double price){
 		int N = getProduct().getN();
 		_amountPaid = applyPenalty(getBaseValue(), getP(N));
 		
 	}
 
+	
+	/** 
+	 * @param N
+	 * @return int
+	 */
 	public int getP(int N){
 		if ((getDeadline().getDays() - getPaymentDate().getDays()) >= N){
 			return 1;
@@ -52,6 +72,12 @@ public class SaleByCredit extends Sale{
 		}
 	}
 
+	
+	/** 
+	 * @param basePrice
+	 * @param p
+	 * @return double
+	 */
 	public double applyPenalty(double basePrice, int p){
 		if (p == 1){
 			return basePrice * 0.9;
@@ -104,12 +130,20 @@ public class SaleByCredit extends Sale{
 		}
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String toString(){
 		return String.format("VENDA|%s|%s|%s|%d|%d|%d|%d", getId(),
 			getPartner().getId(), getProduct().getId(), getQuantity(),
 				(int)Math.round(getBaseValue()), (int)Math.round(_amountPaid), _deadline.getDays(), getPaymentDate().getDays());
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getType(){
 		return "SaleByCredit";
 	}

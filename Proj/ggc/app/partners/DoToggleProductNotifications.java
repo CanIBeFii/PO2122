@@ -9,7 +9,6 @@ import ggc.core.Product;
 
 import ggc.app.exception.UnknownPartnerKeyException;
 import ggc.app.exception.UnknownProductKeyException;
-//FIXME import classes
 
 /**
  * Toggle product-related notifications.

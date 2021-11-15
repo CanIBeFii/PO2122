@@ -3,9 +3,6 @@ package ggc.core;
 import java.util.*;
 import java.io.Serializable;
 
-import ggc.core.AggregateProduct;
-
-
 public class Recipe implements Serializable{
 	private double _alpha;
 	private List<Component> _components;
@@ -31,7 +28,6 @@ public class Recipe implements Serializable{
 	}
 
 	public String toString(){
-		int i = 0;
 		StringBuilder res = new StringBuilder();
 		for(Component c: _components){
 			res.append(c.getComponent().getId() + ":" + c.getQuantity() + "#");

@@ -18,18 +18,34 @@ public class Notification implements Serializable{
 		_notify = false;
 	}
 
+	
+	/** 
+	 * @return NotificationType
+	 */
 	public NotificationType getType(){
 		return _type;
 	}
 
+	
+	/** 
+	 * @return Product
+	 */
 	public Product getProduct(){
 		return _product;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getDescription(){
 		return _description;
 	}
 	
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean hasNotify(){
 		return _notify;
 	}
@@ -38,11 +54,20 @@ public class Notification implements Serializable{
 		_notify = !_notify;
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj){
 		return obj instanceof Notification && _type.equals(((Notification)obj).getType()) && _product.getId().equals(((Notification)obj).getProduct().getId()); 
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String toString(){
 		return getDescription() + "|" + _product.getId() + "|" + (int)_price;
 	}

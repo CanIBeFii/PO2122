@@ -7,7 +7,6 @@ import ggc.core.Transaction;
 import ggc.core.WarehouseManager;
 
 import ggc.app.exception.UnknownTransactionKeyException;
-//FIXME import classes
 
 /**
  * Receive payment for sale transaction.

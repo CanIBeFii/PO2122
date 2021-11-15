@@ -2,7 +2,6 @@ package ggc.core;
 
 import java.util.*;
 import java.io.Serializable;
-import java.math.*;
 
 public class Partner implements Serializable, NotifyObserver{
 	private String _name;
@@ -97,9 +96,10 @@ public class Partner implements Serializable, NotifyObserver{
 	/**
    	* @return the new number of points
    	*/
-	public void changePoints(double morePoints){/*Ver se a funcoes que dão isto verificam se estamos a tirar todos so pontos deles ou se tem de se por uma Exception*/
+	public void changePoints(double morePoints){
 		_points += morePoints;
 	}
+	
 	
 	public void changeStatus(){
 		if (_points > 25000){
@@ -109,7 +109,10 @@ public class Partner implements Serializable, NotifyObserver{
 			_status = "Selection";
 		}
 	}
-
+	
+	/**
+	 * @param days
+	 */
 	public void changeStatus(int days){
 		if(_status.equals("Normal")){
 			_points = 0;
@@ -225,11 +228,23 @@ public class Partner implements Serializable, NotifyObserver{
 		}
 	}
 
+
+	/**
+	 * @param des
+	 * @param p
+	 * @param price
+	 * @return
+	 */
 	public Notification createNotification(String des, Product p, double price){
 		Notification n = new Notification(p, des, price);
 		return n;
 	}
 
+
+	/**
+	 * @param prod
+	 * @return
+	 */
 	public boolean toggleProductNotifications(Product prod){
 		for(Product p: _interested){
 			if(p.getId().equals(prod.getId())){

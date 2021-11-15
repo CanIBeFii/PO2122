@@ -1,7 +1,6 @@
 package ggc.core;
 
 import java.io.Serializable;
-import java.math.*;
 
 public class AggregateProduct extends Product{
 	private Recipe _recipe;

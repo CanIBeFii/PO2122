@@ -10,7 +10,6 @@ import ggc.core.Product;
 import ggc.app.exception.UnknownPartnerKeyException;
 import ggc.app.exception.UnknownProductKeyException;
 import ggc.app.exception.UnavailableProductException;
-//FIXME import classes
 
 /**
  * Register order.

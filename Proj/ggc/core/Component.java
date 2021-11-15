@@ -2,7 +2,6 @@ package ggc.core;
 
 import java.io.Serializable;
 
-// Needs to get information of Products somehow
 public class Component implements Serializable{
     private int _quantity;
     private Product _component;

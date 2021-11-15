@@ -4,7 +4,7 @@ public class BreakdownSale extends Sale{
 
 	private Date _deadline;
 	private double _amountPaid;
-	public Batch _batch;  //tem de ser vector por serem varios batch??
+	public Batch _batch;  
 
 	protected BreakdownSale(Product p,int quantity, double price, Partner part, int id, Date date){
 

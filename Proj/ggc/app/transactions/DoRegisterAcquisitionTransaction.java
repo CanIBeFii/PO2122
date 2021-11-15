@@ -5,17 +5,13 @@ import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 import ggc.core.WarehouseManager;
 
-import ggc.app.exception.UnknownProductKeyException;
 import ggc.app.exception.UnknownPartnerKeyException;
-
-import javax.swing.text.AbstractDocument.BranchElement;
 
 import ggc.app.exception.UnavailableProductException;
 
 import ggc.core.Partner;
 import ggc.core.Product;
 import ggc.core.Batch;
-//FIXME import classes
 
 /**
  * Register order.

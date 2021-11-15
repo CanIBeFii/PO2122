@@ -18,7 +18,7 @@ public class Batch implements Serializable{
 	}
 	
 	/**
-   	* @return  the quanity of product in the batch
+   	* @return  the quantity of product in the batch
    	*/
 	public int getQuantity(){
 		return _quantity;
@@ -35,7 +35,7 @@ public class Batch implements Serializable{
    	* @param q
    	* @return  
    	*/
-	public void removeQuantity(int q)/*throws BadEntryException*/{
+	public void removeQuantity(int q){
 		if(q <= _quantity){
 			_quantity -= q;
 		}
@@ -69,8 +69,4 @@ public class Batch implements Serializable{
 		return String.format("%s|%s|%d|%d", _product.getId(), _partner.getId(), (int)Math.round(_price), _quantity);
 	}
 
-
-	/*public String toString(){
-		return String.format("%s")
-	}*/
 }

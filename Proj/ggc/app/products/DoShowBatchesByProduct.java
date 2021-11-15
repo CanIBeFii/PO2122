@@ -8,7 +8,6 @@ import ggc.core.Batch;
 
 import java.util.*;
 import ggc.app.exception.UnknownProductKeyException;
-//FIXME import classes
 
 /**
  * Show all products.

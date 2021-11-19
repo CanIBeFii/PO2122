@@ -8,7 +8,8 @@ import pt.tecnico.uilib.menus.CommandException;
 import ggc.core.WarehouseManager;
 
 import ggc.core.Partner;
-//FIXME import classes
+import ggc.core.Transaction;
+
 
 /**
  * Lookup payments by given partner.
@@ -31,6 +32,13 @@ public class DoLookupPaymentsByPartner extends Command<WarehouseManager> {
     if(part == null){
       throw new UnknownPartnerKeyException(idPart);
     }
+
+    for(Transaction t: _receiver.getPartnerSales(part)){
+      if(t.isPaid() || t.getType().equals("BreakdownSale")){
+        _display.addLine(t.toString());
+      }
+    }
+    _display.display();
   }
 
 }

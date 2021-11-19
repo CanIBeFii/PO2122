@@ -45,6 +45,10 @@ public class DoRegisterBreakdownTransaction extends Command<WarehouseManager> {
     if (prod.getQuantity() < quantity){
       throw new UnavailableProductException(idProd, quantity, prod.getQuantity());
     }
+
+    if(prod.getType().equals("AggregateProduct")){
+      _receiver.registerBreakdownSale(prod, quantity, part);
+    }
   }
 
 }

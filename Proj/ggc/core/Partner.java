@@ -144,7 +144,9 @@ public class Partner implements Serializable, NotifyObserver{
 			return res;
 		}
 		for(Sale s : _sales){
-			res += s.getBaseValue();
+			if(s.getType().equals("SaleByCredit")){
+				res += s.getBaseValue();
+			}
 		}
 		return res;
 	}
@@ -249,15 +251,28 @@ public class Partner implements Serializable, NotifyObserver{
 		for(Product p: _interested){
 			if(p.getId().equals(prod.getId())){
 				_interested.remove(p);
+				prod.removeObserver(this);
 				return false;
 			}
 		}
 		_interested.add(prod);
+		prod.addObserver(this);
 		return true;
 	}
 
 	@Override
 	public void inform(String des, Product p, double price){
+		/*for(Notification n: _notifications){
+			if(n.getDescription().equals(des) && p.getId().equals(n.getProduct().getId()) && !n.hasNotify()){
+				n.toggleNotify();
+				break;
+			}
+		}*/
 		_notifications.add(createNotification(des, p, price));
+	} 
+
+	public void addInterest(Product p){
+		_interested.add(p);
 	}
+
 }

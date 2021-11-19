@@ -1,5 +1,7 @@
 package ggc.core;
 
+import java.math.*;
+
 public class BreakdownSale extends Sale{
 
 	private Date _deadline;
@@ -10,18 +12,33 @@ public class BreakdownSale extends Sale{
 
 		super(p, quantity, price, part, id, date);
 		_deadline = date;
-		_amountPaid = getBaseValue();
+		if(price < 0){
+			_amountPaid = 0;
+		}
+		else{
+			_amountPaid = getBaseValue();
+		}
 	}
 
 	public Batch getBatchNumber(){
 		return _batch;
+	} 
+
+	public String productRecipeString(){
+		StringBuilder res = new StringBuilder();
+		for(Component c: getProduct().getRecipe().getComponents()){
+			res.append(c.getComponent().getId() + ":" + (c.getQuantity() * getQuantity()) +":" + (int)Math.round(c.getComponent().getPrice()* getQuantity() * c.getQuantity()) + "#");
+		}
+		res.deleteCharAt(res.length() - 1);
+		String s = res.toString();
+		return s;
 	}
 
 	@Override
 	public String toString(){
 		return String.format("DESAGREGAÇÃO|%d|%s|%s|%d|%d|%d|%d|%s", getId(), 
 			getPartner().getId(), getProduct().getId(), getQuantity(), 
-				(int)Math.round(getBaseValue()), (int)Math.round(_amountPaid), _deadline.getDays(), getPaymentDate().getDays(), getProduct().getRecipe().toString());
+				(int)Math.round(getBaseValue()), (int)Math.round(_amountPaid), _deadline.getDays(), productRecipeString());
 	}
 
 
@@ -30,6 +47,10 @@ public class BreakdownSale extends Sale{
 	}
 
 	public double getAmountPaid(){
-		return getBaseValue();
+		return _amountPaid;
+	}
+
+	public void setAmountPaid(){
+		return;
 	}
 }

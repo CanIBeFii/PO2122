@@ -17,4 +17,12 @@ public class Component implements Serializable{
     public Product getComponent(){
         return _component;
     }
+
+    public String toString(){
+        return "" + _component.getId() + ":" + _quantity + "#";
+    }
+
+    public String toStringBreakdown(){
+        return "" + _component.getId() + ":" + _quantity;
+    }
 }

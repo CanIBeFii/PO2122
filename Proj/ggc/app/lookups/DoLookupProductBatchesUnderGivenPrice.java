@@ -8,7 +8,7 @@ import ggc.core.WarehouseManager;
 import ggc.core.Batch;
 
 import java.util.*;
-//FIXME import classes
+
 
 /**
  * Lookup products cheaper than a given price.

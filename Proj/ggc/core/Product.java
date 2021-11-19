@@ -84,7 +84,7 @@ public abstract class Product implements Serializable, NotifySubject{
         _observers.remove(obs);
      }
     
-    /**
+    /** 
      * @param obs
      */
     public List<NotifyObserver> getObservers(){
@@ -98,7 +98,8 @@ public abstract class Product implements Serializable, NotifySubject{
      @Override
      public void notificateObserver( String notification, Product prod, double price){
          for( NotifyObserver o : _observers){
-             o.inform( notification, prod, price);
+            o.inform(notification, prod, price);
          }
      }
 }
+ 

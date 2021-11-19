@@ -53,7 +53,9 @@ class DoShowBatchesByPartner extends Command<WarehouseManager> {
     batches.sort(comparator);
 
     for(Batch b: batches){
-      _display.addLine(b.toString());
+      if(b.getQuantity() > 0){
+        _display.addLine(b.toString());
+      }
     }
     _display.display();
   }

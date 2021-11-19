@@ -87,8 +87,7 @@ Escolha uma opção: Identificador da transacção: Gestão de Transacções
 4 - Registar compra
 5 - Receber pagamento de venda
 0 - Sair
-Escolha uma opção: Identificador da transacção: Receber pagamento de venda: Operação inválida: A transacção '4' não existe.
-Gestão de Transacções
+Escolha uma opção: Identificador da transacção: Gestão de Transacções
 1 - Visualizar
 2 - Registar desagregação
 3 - Registar venda
@@ -114,7 +113,10 @@ Escolha uma opção: Identificador do parceiro: Consultas
 1 - Produtos com Preço Abaixo de Limite
 2 - Facturas pagas por parceiro
 0 - Sair
-Escolha uma opção: Identificador do parceiro: Consultas
+Escolha uma opção: Identificador do parceiro: VENDA|1|M1|ROLHA|3|6|6|3|2
+DESAGREGAÇÃO|3|M1|GARRAFA|5|5|5|2|ROLHA:10:20#VIDRO:25:250
+VENDA|4|M1|SAL|5|50|50|3|2
+Consultas
 1 - Produtos com Preço Abaixo de Limite
 2 - Facturas pagas por parceiro
 0 - Sair

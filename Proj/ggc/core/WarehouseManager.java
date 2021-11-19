@@ -84,7 +84,6 @@ public class WarehouseManager implements Serializable{
 		return _warehouse.registerPartner(name, adress, id);
 	}
 
-	
 	/** 
 	 * @param id
 	 * @return Product
@@ -175,8 +174,8 @@ public class WarehouseManager implements Serializable{
 	 * @param part
 	 * @return boolean
 	 */
-	public boolean registerBreakdownSale(Product product, int quantity, double price, Partner part){
-		return _warehouse.registerBreakdownSale(product, quantity, price, part);
+	public boolean registerBreakdownSale(Product product, int quantity, Partner part){
+		return _warehouse.registerBreakdownSale(product, quantity, part);
 	}
 
 	

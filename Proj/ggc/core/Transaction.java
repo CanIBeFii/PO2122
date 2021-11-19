@@ -11,6 +11,7 @@ public abstract class Transaction implements Serializable{
 	private int _quantity;
 	private Product _productName;
 	protected Partner _partner;
+	private boolean _paid;
 
 	public Transaction(Product p,int quantity, double price, Partner part, int id, Date date){
 		_id = id;
@@ -20,9 +21,10 @@ public abstract class Transaction implements Serializable{
 		_unitPrice = price / quantity;
 		_baseValue = price;
 		_paymentDate = date;
+		_paid = false;
 	}
     
-	
+	 
 	/** 
 	 * @return int
 	 */
@@ -43,9 +45,8 @@ public abstract class Transaction implements Serializable{
 	 * @param d
 	 */
 	public void setPaymentDate(Date d){
-		if(_paymentDate.getDays() == 0){
-			_paymentDate.add(d.getDays());
-		}
+		_paymentDate.add(d.getDays() - _paymentDate.getDays());
+		setAmountPaid();
 	}
 
 	
@@ -88,18 +89,23 @@ public abstract class Transaction implements Serializable{
 		return _partner;
 	}
 
-	
+	public boolean setPaid(){
+		if(!_paid){
+			_paid = true;
+			_partner.changePoints(getAmountPaid() * 10);
+		}
+		return _paid;
+	}
 	/** 
 	 * @return boolean
 	 */
 	public boolean isPaid(){
-		if(_paymentDate.getDays() == 0){
-			return false;
-		}
-		return true;
+		return _paid;
 	}
 
 	public abstract String getType();
 
 	public abstract double getAmountPaid();
+
+	public abstract void setAmountPaid();
 }

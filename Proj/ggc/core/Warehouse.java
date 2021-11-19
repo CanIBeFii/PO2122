@@ -123,6 +123,9 @@ public class Warehouse implements Serializable {
 		if(this.getPartner(id) != null){
 			return false;
 		}
+		if(_allPartners.size() + 1 > _allProducts.size() + 10){
+			return false;
+		}
 		Partner p = new Partner(name, address, id);
 		_allPartners.add(p);
 		for(Product prod: _allProducts){
@@ -165,6 +168,7 @@ public class Warehouse implements Serializable {
 		SimpleProduct p = new SimpleProduct(id);
 		for(Partner partner: _allPartners){
 			p.addObserver(partner);
+			partner.addInterest(p);
 		}
 		return _allProducts.add(p);
 	}
@@ -182,6 +186,7 @@ public class Warehouse implements Serializable {
 		AggregateProduct ap = new AggregateProduct(id, recipe);
 		for(Partner partner: _allPartners){
 			ap.addObserver(partner);
+			partner.addInterest(ap);
 		}
 		return _allProducts.add(ap);
 	}
@@ -245,9 +250,51 @@ public class Warehouse implements Serializable {
 	 * @param part
 	 * @return
 	 */
-	protected boolean registerBreakdownSale(Product product, int quantity, double price, Partner part){
+	protected boolean registerBreakdownSale(Product product, int quantity, Partner part){
+		List<Batch> batches = getBatchProduct(product);
+		
+		if(product.getQuantity() < quantity){
+			return false;
+		}
+
+		Comparator<Batch> comparator = new Comparator<Batch>() {
+			public int compare(Batch a, Batch b) {
+				  return ((int)Math.round(a.getPrice()) - (int)Math.round(b.getPrice()));
+			}
+		};
+
+		batches.sort(comparator);
+		double price = 0;
+		int amount = 0;
+
+		for(Batch b: batches){
+			if(amount <= quantity){
+				int i = b.getQuantity();
+				while(i > 0 && amount < quantity){
+					amount++;
+					i--;
+					removeQuantityBatch(b.getId(), 1);
+					getProduct(product.getId()).removeQuantity(1);
+					price += b.getPrice();
+				}
+			}
+		}
+
+		for(Component c: product.getRecipe().getComponents()){
+			List<Batch> batchComp = getBatchProduct(c.getComponent());
+			double priceComp = 10000000;
+			for(Batch b: batchComp){
+				if(b.getPrice() < priceComp){
+					priceComp = b.getPrice();
+				}
+			}
+			price -= priceComp * (quantity * c.getQuantity());
+			registerBatch(part, c.getComponent(), quantity * c.getQuantity(), priceComp);
+		}
+
 		BreakdownSale bs = new BreakdownSale(product, quantity, price, part, _nextTransactionId, _date);
 		if(_allTransactions.add(bs)){
+			part.addBreakdown(bs);
 			_nextTransactionId++;
 			return true;
 		}
@@ -268,7 +315,7 @@ public class Warehouse implements Serializable {
 
 		Comparator<Batch> comparator = new Comparator<Batch>() {
 			public int compare(Batch a, Batch b) {
-				  return -((int)Math.round(a.getPrice()) - (int)Math.round(b.getPrice()));
+				  return ((int)Math.round(a.getPrice()) - (int)Math.round(b.getPrice()));
 			}
 		};
 
@@ -276,12 +323,12 @@ public class Warehouse implements Serializable {
 			return false;
 		}
 
-		batches.sort(comparator);
+		batches.sort(comparator); 
 		int amount = 0;
 		double price = 0;
 
 		for(Batch b: batches){
-			if(amount < quantity){
+			if(amount <= quantity){
 				int i = b.getQuantity();
 				while(i > 0 && amount < quantity){
 					amount++;
@@ -292,7 +339,7 @@ public class Warehouse implements Serializable {
 				}
 			}
 		}
-		SaleByCredit sc = new SaleByCredit(product, quantity, price, part, deadDate, _nextTransactionId, new Date(0));
+		SaleByCredit sc = new SaleByCredit(product, quantity, price, part, deadDate, _nextTransactionId, _date);
 		if(_allTransactions.add(sc)){
 			part.addSale(sc);
 			_nextTransactionId++;
@@ -407,6 +454,11 @@ public class Warehouse implements Serializable {
    	*/
 	protected void advanceCurrentDay(int day){
 		_date.add(day);
+		for(Transaction t: _allTransactions){
+			if(t.getType().equals("SaleByCredit") && !t.isPaid()){
+				t.setPaymentDate(getCurrentDate());
+			}
+		}
 	}
 
 
@@ -430,7 +482,7 @@ public class Warehouse implements Serializable {
 				res -= t.getAmountPaid();
 			}
 			else{
-				res += 0;
+				res += t.getAmountPaid();
 			}
 		}
 		_availableBalance = res;
@@ -441,13 +493,14 @@ public class Warehouse implements Serializable {
 		double res = 0;
 		for(Transaction t: _allTransactions){
 			if(t.getType().equals("SaleByCredit")){
-					res += t.getAmountPaid();
+				t.setAmountPaid();
+				res += t.getAmountPaid();
 			}
 			else if(t.getType().equals("Acquisition")){
 				res -= t.getAmountPaid();
 			}
 			else{
-				res += 0;
+				res += t.getAmountPaid();
 			}
 		}
 		_contabilisticBalance = res;

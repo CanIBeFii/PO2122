@@ -32,7 +32,13 @@ public class DoReceivePayment extends Command<WarehouseManager> {
 
     if(t.getType().equals("SaleByCredit") && !t.isPaid()){
       t.setPaymentDate(_receiver.getCurrentDate());
-    } 
+      t.setPaid();
+    }
+    
+    else if(t.getType().equals("BreakdownSale") && !t.isPaid() && t.getAmountPaid() > 0){
+      t.setPaymentDate(_receiver.getCurrentDate());
+      t.setPaid();
+    }
   }
 
 }

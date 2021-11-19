@@ -31,4 +31,8 @@ public class Acquisition extends Transaction{
 	public double getAmountPaid(){
 		return getBaseValue() * getQuantity();
 	}
+
+	public void setAmountPaid(){
+		return;
+	}
 }

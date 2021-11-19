@@ -28,9 +28,14 @@ public class Recipe implements Serializable{
 	}
 
 	public String toString(){
+		/*String res = "";
+		for(Component c: _components){
+			res += c.toString() + "#";
+		}
+		res.*/
 		StringBuilder res = new StringBuilder();
 		for(Component c: _components){
-			res.append(c.getComponent().getId() + ":" + c.getQuantity() + "#");
+			res.append(c.toString());
 		}
 		res.deleteCharAt(res.length() - 1);
 		String s = res.toString();
